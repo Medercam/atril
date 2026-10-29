@@ -1,0 +1,12 @@
+/* Atril · SYSTARC LLANOS — funciona sin conexión. Cambia la versión al actualizar los archivos. */
+const V="atril-1.2";
+const FILES=["./", "index.html", "manifest.webmanifest", "pdf.min.js", "pdf.worker.min.js", "jszip.min.js", "epub.min.js", "fonts/is-500.woff2", "fonts/is-600.woff2", "fonts/literata-500.woff2", "fonts/literata-700.woff2", "fonts/is-400.woff2", "icons/icon-maskable-512.png", "icons/icon-192.png", "icons/apple-touch-icon.png", "icons/icon-512.png"];
+self.addEventListener("install",e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting()))});
+self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==V).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
+self.addEventListener("fetch",e=>{
+  if(e.request.method!=="GET")return;
+  e.respondWith(caches.match(e.request,{ignoreSearch:true}).then(hit=>{
+    const net=fetch(e.request).then(res=>{if(res&&res.ok&&new URL(e.request.url).origin===location.origin){const cp=res.clone();caches.open(V).then(c=>c.put(e.request,cp))}return res}).catch(()=>hit);
+    return hit||net;
+  }));
+});

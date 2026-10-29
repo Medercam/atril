@@ -1,0 +1,30 @@
+{
+ "name": "Atril · SYSTARC LLANOS",
+ "short_name": "Atril",
+ "description": "Tu biblioteca de PDF y libros electrónicos, siempre a la mano.",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "orientation": "any",
+ "background_color": "#0a1c66",
+ "theme_color": "#1b45c4",
+ "lang": "es",
+ "icons": [
+  {
+   "src": "icons/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png"
+  },
+  {
+   "src": "icons/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png"
+  },
+  {
+   "src": "icons/icon-maskable-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ]
+}
